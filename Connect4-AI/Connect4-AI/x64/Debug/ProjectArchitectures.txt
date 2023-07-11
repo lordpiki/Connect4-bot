@@ -1,0 +1,1 @@
+C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-AI\Connect4-AI\Connect4-AI.vcxproj;x64
