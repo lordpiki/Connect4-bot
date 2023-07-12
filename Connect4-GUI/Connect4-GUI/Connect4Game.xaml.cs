@@ -1,5 +1,4 @@
-﻿using Connect4_GUI;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,19 +8,22 @@ namespace Connect4Game
 {
     public partial class MainWindow : Window
     {
-        private Board _Board { get; set; }
-
-        
-
+        public ObservableCollection<Cell> Cells { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
-            _Board = new Board();
+            Cells = new ObservableCollection<Cell>();
 
             // Generate the cells
-            
+            for (int row = 0; row < 6; row++)
+            {
+                for (int col = 0; col < 7; col++)
+                {
+                    Cells.Add(new Cell());
+                }
+            }
         }
 
         private void Cell_Click(object sender, RoutedEventArgs e)
@@ -33,28 +35,21 @@ namespace Connect4Game
             // You can communicate with the other program here to get the board state
 
             // Example: Change the color of the clicked cell to indicate selection
-            
+            cell.Color = Colors.Yellow;
+        }
 
-            if (cell.Color == Colors.Red || cell.Color == Colors.Yellow)
+        private void Reset(object sender, RoutedEventArgs e)
+        {
+            foreach (Cell cell in Cells)
             {
-                return;
+                cell.Color = Colors.White;
             }
-
-            
         }
     }
 
     public class Cell : INotifyPropertyChanged
     {
         private Color _color;
-        public int x;
-        public int y;
-
-        public Cell(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
 
         public Color Color
         {
@@ -66,8 +61,6 @@ namespace Connect4Game
             }
         }
 
-        
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -75,6 +68,4 @@ namespace Connect4Game
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
-
 }

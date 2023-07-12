@@ -1,6 +1,4 @@
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\Connect4-GUI.csproj.AssemblyReference.cache
-C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\MainWindow.baml
-C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\Connect4-GUI_MarkupCompile.cache
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\Connect4-GUI.g.resources
@@ -20,4 +18,3 @@ C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connec
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\ref\Connect4-GUI.dll
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\Connect4Game.baml
 C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\Connect4Game.g.cs
-C:\Users\Miki\Documents\Computer Science\GitHub\Connect4-bot\Connect4-GUI\Connect4-GUI\obj\Debug\net6.0-windows\Connect4-GUI_MarkupCompile.lref
