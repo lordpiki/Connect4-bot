@@ -47,11 +47,11 @@ void Board::switchTurn()
 }
 
 // function makes the move in the board and adds it the list
-bool Board::makeMove(const Move& move)
+string Board::makeMove(const Move& move)
 {
     if (!isMoveLegal(move))
     {
-        return false;
+        return returnResult(ILLEGAL_MOVE);
     }
     for (int i = 6 - 1; i >= 0; i--)
     {
@@ -63,7 +63,7 @@ bool Board::makeMove(const Move& move)
     }
     _first.push_back(move);
     switchTurn();
-    return false;
+    return returnResult(VALID_MOVE);
 }
 
 list<Move> Board::getList()
@@ -74,6 +74,12 @@ list<Move> Board::getList()
 bool Board::isGameOver()
 {
     return false;
+}
+
+string Board::returnResult(int code)
+{
+    string message = std::to_string(code) + getBoard();
+    return message.c_str();
 }
 
 char* Board::getBoard()
@@ -95,3 +101,4 @@ void Board::printBoard()
         cout << "|" << endl;
     }
 }
+

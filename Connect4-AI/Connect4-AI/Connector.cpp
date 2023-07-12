@@ -58,10 +58,9 @@ void Connector::handleClient()
     }
 }
 
-void Connector::sendBoardToClient(char* board)
+void Connector::sendBoardToClient(const string& resp)
 {
-    std::string b(board);
-    WriteFile(_pipe, b.c_str(), BOARD_WIDTH*BOARD_HEIGHT, NULL, NULL);
+    WriteFile(_pipe, resp.c_str(), BOARD_WIDTH*BOARD_HEIGHT + 1, NULL, NULL);
 }
 
 int Connector::getCol()

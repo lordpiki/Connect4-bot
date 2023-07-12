@@ -1,15 +1,18 @@
 ﻿using Connect4_GUI;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Connect4Game
 {
     public partial class MainWindow : Window
     {
         public ObservableCollection<Cell> Cells { get; set; }
+        public string message;
 
         Connector connector;
         public MainWindow()
@@ -37,13 +40,7 @@ namespace Connect4Game
             var clickedCell = (Button)sender;
             var cell = (Cell)clickedCell.DataContext;
             setBoard(connector.sendData(cell.col.ToString()));
-            
 
-            // TODO: Handle the logic for the clicked cell
-            // You can communicate with the other program here to get the board state
-
-            // Example: Change the color of the clicked cell to indicate selection
-            cell.Color = Colors.Yellow;
         }
 
         private void Reset(object sender, RoutedEventArgs e)
@@ -56,7 +53,28 @@ namespace Connect4Game
 
         private void setBoard(string board)
         {
+            if (board[0] == '2')
+            {
+                MessageText.Visibility = Visibility.Visible;
 
+                // Start the fade-out animation
+                DoubleAnimation fadeOutAnimation = new DoubleAnimation();
+                fadeOutAnimation.From = 1.0;
+                fadeOutAnimation.To = 0.0;
+                fadeOutAnimation.Duration = TimeSpan.FromSeconds(1);
+                fadeOutAnimation.Completed += (s, _) =>
+                {
+                    // Animation completed, hide the message
+                    //MessageText.Visibility = Visibility.Collapsed;
+                };
+
+                MessageText.BeginAnimation(OpacityProperty, fadeOutAnimation);
+                return;
+            }
+            for (int i = 1; i < board.Length; i++)
+            {
+                Cells[i - 1].Color = board[i] == '-' ? Colors.White : (board[i] == 'R' ? Colors.Red : Colors.Yellow);
+            }
         }
     }
 

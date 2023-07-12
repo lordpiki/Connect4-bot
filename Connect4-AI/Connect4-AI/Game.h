@@ -12,6 +12,7 @@ public:
 private:
 	Connector _connector;
 	Board _board;
+	char _turn;
 
 };
 

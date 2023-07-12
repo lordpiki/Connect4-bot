@@ -1,10 +1,19 @@
 #pragma once
 #include <list>
+#include <string>
 
 using std::list;
+using std::string;
 
 #define BOARD_HEIGHT 6
 #define BOARD_WIDTH 7
+
+#define VALID_MOVE 1
+#define ILLEGAL_MOVE 2
+#define RED_WIN 3
+#define YELLOW_WIN 4
+#define TIE 5
+
 
 #define YELLOW 'Y'
 #define RED 'R'
@@ -29,9 +38,11 @@ public:
 	bool isMoveLegal(const Move& move);
 	char getCurrentTurn();
 	void switchTurn();
-	bool makeMove(const Move& move);
+	string makeMove(const Move& move);
 	list<Move> getList();
 	bool isGameOver();
+
+	string returnResult(int code);
 
 	char* getBoard();
 	void printBoard();
