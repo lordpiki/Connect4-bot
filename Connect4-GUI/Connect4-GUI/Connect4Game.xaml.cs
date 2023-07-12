@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Connect4_GUI;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +11,12 @@ namespace Connect4Game
     {
         public ObservableCollection<Cell> Cells { get; set; }
 
+        Connector connector;
         public MainWindow()
         {
             InitializeComponent();
+            connector = new Connector();
+            connector.initPipe();
             DataContext = this;
             Cells = new ObservableCollection<Cell>();
 
@@ -21,7 +25,9 @@ namespace Connect4Game
             {
                 for (int col = 0; col < 7; col++)
                 {
-                    Cells.Add(new Cell());
+                    var cell = new Cell();
+                    cell.col = col;
+                    Cells.Add(cell);
                 }
             }
         }
@@ -30,6 +36,8 @@ namespace Connect4Game
         {
             var clickedCell = (Button)sender;
             var cell = (Cell)clickedCell.DataContext;
+            setBoard(connector.sendData(cell.col.ToString()));
+            
 
             // TODO: Handle the logic for the clicked cell
             // You can communicate with the other program here to get the board state
@@ -45,11 +53,17 @@ namespace Connect4Game
                 cell.Color = Colors.White;
             }
         }
+
+        private void setBoard(string board)
+        {
+
+        }
     }
 
     public class Cell : INotifyPropertyChanged
     {
         private Color _color;
+        public int col;
 
         public Color Color
         {
@@ -60,6 +74,8 @@ namespace Connect4Game
                 OnPropertyChanged("Color");
             }
         }
+
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 

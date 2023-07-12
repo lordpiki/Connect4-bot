@@ -71,6 +71,16 @@ list<Move> Board::getList()
     return _first;
 }
 
+bool Board::isGameOver()
+{
+    return false;
+}
+
+char* Board::getBoard()
+{
+    return *_board;
+}
+
 void Board::printBoard()
 {
     cout << "  1 2 3 4 5 6 7" << endl;

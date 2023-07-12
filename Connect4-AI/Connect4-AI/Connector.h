@@ -5,7 +5,6 @@
 using std::cout;
 using std::endl;
 
-
 class Connector
 {
 public:
@@ -14,6 +13,8 @@ public:
 	bool connectPipeline();
 	void waitForClient();
 	void handleClient();
+	void sendBoardToClient(char* board);
+	int getCol();
 private:
 	HANDLE _pipe;
 };

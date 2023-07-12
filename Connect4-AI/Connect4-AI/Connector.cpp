@@ -1,4 +1,12 @@
 #include "Connector.h"
+#include <string>
+
+#define BOARD_HEIGHT 6
+#define BOARD_WIDTH 7
+
+#define YELLOW 'Y'
+#define RED 'R'
+#define NO_MOVE '-'
 
 Connector::Connector()
 {
@@ -24,6 +32,7 @@ bool Connector::connectPipeline()
     }
 
     std::cout << "Waiting for client connection..." << std::endl;
+    waitForClient();
 }
 
 void Connector::waitForClient()
@@ -31,20 +40,38 @@ void Connector::waitForClient()
     if (ConnectNamedPipe(_pipe, NULL))
     {
         std::cout << "Client connected." << std::endl;
-        handleClient();
     }
 }
 
 void Connector::handleClient()
 {
-    char buffer[1024];
+    char buffer[2];
 
     while (ReadFile(_pipe, buffer, sizeof(buffer), NULL, NULL))
     {
         // Process received data (e.g., game logic)
-
+        buffer[1] = NULL;
+        cout << buffer << endl;
         // Send response back to client
         std::string response = "Received data from client.";
         WriteFile(_pipe, response.c_str(), response.size(), NULL, NULL);
     }
+}
+
+void Connector::sendBoardToClient(char* board)
+{
+    std::string b(board);
+    WriteFile(_pipe, b.c_str(), BOARD_WIDTH*BOARD_HEIGHT, NULL, NULL);
+}
+
+int Connector::getCol()
+{
+    char buffer[1];
+
+    if (!ReadFile(_pipe, buffer, sizeof(buffer), NULL, NULL))
+    {
+        cout << "Connection lost, disconnecting" << endl;
+        exit(1);
+    }
+    return buffer[0] - '0';
 }

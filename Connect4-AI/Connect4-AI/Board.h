@@ -10,6 +10,7 @@ using std::list;
 #define RED 'R'
 #define NO_MOVE '-'
 
+
 struct Move
 {
 	Move(int x, char turn) : _x(x), _turn(turn) {};
@@ -30,7 +31,9 @@ public:
 	void switchTurn();
 	bool makeMove(const Move& move);
 	list<Move> getList();
+	bool isGameOver();
 
+	char* getBoard();
 	void printBoard();
 
 private:
