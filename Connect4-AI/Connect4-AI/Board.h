@@ -8,11 +8,12 @@ using std::list;
 
 #define YELLOW 'Y'
 #define RED 'R'
+#define NO_MOVE '-'
 
 struct Move
 {
-	Move(int x, int y, char turn) : _x(x), _turn(turn) {};
-	Move(int x, int y) : _x(x), _turn('0') {};
+	Move(int x, char turn) : _x(x), _turn(turn) {};
+	Move(int x) : _x(x), _turn('0') {};
 	int _x;
 	char _turn;
 };
@@ -24,16 +25,18 @@ public:
 
 	Board();
 
-	bool isMoveLegal(Move* move);
+	bool isMoveLegal(const Move& move);
 	char getCurrentTurn();
 	void switchTurn();
-	bool makeMove(Move* move);
-	list<Move*> getList();
+	bool makeMove(const Move& move);
+	list<Move> getList();
+
+	void printBoard();
 
 private:
 	char _turn;
 	char _board[BOARD_HEIGHT][BOARD_WIDTH];
-	list<Move*> _first;
+	list<Move> _first;
 	
 };
 

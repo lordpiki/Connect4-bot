@@ -1,28 +1,33 @@
 #include "Board.h"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 Board::Board()
 {
+    _turn = RED;
     for (int i = 0; i < BOARD_HEIGHT; i++)
     {
         for (int j = 0; j < BOARD_WIDTH; j++)
         {
-            _board[i][j] = '-';
+            _board[i][j] = NO_MOVE;
         }
     }
 }
 
 // function to check if the move is legal
-bool Board::isMoveLegal(Move* move)
+bool Board::isMoveLegal(const Move& move)
 {
-    if (move->_turn != _turn) 
+    if (move._turn != _turn) 
     {
         return false;
     }
-    if (_board[0][move->_x])
+    if (_board[0][move._x] != NO_MOVE)
     {
         return false;
     }
-    if (0 > move->_x || move->_x >= BOARD_WIDTH)
+    if (0 > move._x || move._x >= BOARD_WIDTH)
     {
         return false;
     }
@@ -42,18 +47,41 @@ void Board::switchTurn()
 }
 
 // function makes the move in the board and adds it the list
-bool Board::makeMove(Move* move)
+bool Board::makeMove(const Move& move)
 {
     if (!isMoveLegal(move))
     {
         return false;
+    }
+    for (int i = 6 - 1; i >= 0; i--)
+    {
+        if (_board[i][move._x] == NO_MOVE)
+        {
+            _board[i][move._x] = move._turn;
+            break;
+        }
     }
     _first.push_back(move);
     switchTurn();
     return false;
 }
 
-list<Move*> Board::getList()
+list<Move> Board::getList()
 {
     return _first;
+}
+
+void Board::printBoard()
+{
+    cout << "  1 2 3 4 5 6 7" << endl;
+
+    for (int i = 0; i < BOARD_HEIGHT; i++)
+    {
+        cout << "| ";
+        for (int j = 0; j < BOARD_WIDTH; j++)
+        {
+            cout << _board[i][j] << " ";
+        }
+        cout << "|" << endl;
+    }
 }
